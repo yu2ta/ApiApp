@@ -19,15 +19,17 @@ class WebViewActivity : AppCompatActivity(),FragmentCallback {
 
         //お気に入りボタンの処理
         // お気に入り状態を取得
-        val isFavorite = FavoriteShop.findBy(shop.id) != null
+        var isFavorite = FavoriteShop.findBy(shop.id) != null
         fab.setImageResource(if (isFavorite) R.drawable.ic_star else R.drawable.ic_star_border)
         fab.setOnClickListener {
             if(isFavorite) {
                 onDeleteFavorite(shop.id)
                 fab.setImageResource(R.drawable.ic_star_border)
+                isFavorite = false
             } else {
                 onAddFavorite(shop)
                 fab.setImageResource(R.drawable.ic_star)
+                isFavorite = true
             }
         }
     }
